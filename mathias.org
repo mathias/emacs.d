@@ -80,3 +80,25 @@ From http://pages.sachachua.com/.emacs.d/Sacha.html and http://www.wisdomandwond
         regexp-search-ring))
 #+END_SRC
 
+*** Windowing mode configuration
+
+When running in a graphical mode, I want to hide all the extra cruft that I don't use:
+
+#+BEGIN_SRC emacs-lisp
+  (when window-system
+    (tooltip-mode -1)
+    (tool-bar-mode -1)
+    (menu-bar-mode -1)
+    (scroll-bar-mode -1))
+#+END_SRC
+
+*** Look & Feel (UX)
+
+*** UTF-8 Support
+
+From http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
+#+BEGIN_SRC emacs-lisp
+(prefer-coding-system 'utf-8)
+(when (display-graphic-p)
+  (setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING)))
+#+END_SRC

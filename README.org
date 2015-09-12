@@ -1,6 +1,12 @@
-* emacs.d
+#+TITLE emacs.d
 
 An attempt at rewriting my (mathias's) emacs config in a literate programming style with org's babel mode.
+
+*Note*: This is super WIP! It is not fully finished and I only use it while I am developing it. Don't read into it too much.
+
+** Inspirations
+
+Inspired by http://pages.sachachua.com/.emacs.d/Sacha.html Initial setup and file layout from Sacha's emacs config.
 
 ** License
 

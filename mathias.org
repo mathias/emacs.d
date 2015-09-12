@@ -1,0 +1,66 @@
+#+TITLE: Matt Gauger's Emacs configuration
+#+OPTIONS: toc:4 h:4
+
+* Configuration
+** About this file
+<<babel-init>>
+
+Inspired by [[https://github.com/sachac/.emacs.d/blob/gh-pages/Sacha.org][Sacha Chua's Emacs configuration]] which demonstrates how to use org-babel to create a literate programming Emacs config.
+
+** Personal information
+#+BEGIN_SRC emacs-lisp
+  (setq user-full-name "Matt Gauger"
+        user-mail-address "matt.gauger@gmail.com")
+#+END_SRC
+
+** Emacs initialization
+
+*** Add package sources
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
+
+  (unless (assoc-default "melpa" package-archives)
+    (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t))
+
+  (when (not package-archive-contents)
+    (package-refresh-contents))
+#+END_SRC
+
+*** Load secrets
+
+If I had any, this is where they'd live:
+
+#+BEGIN_SRC emacs-lisp
+(load "~/.emacs.secrets" t)
+#+END_SRC
+
+** General configuration
+
+*** Backups
+
+I used the approach my old =.emacs= config file used in setting up backup files:
+
+Do not save autosave/swap files in current directory. Save all tempfiles in $TMPDIR/emacs$UID/ instead:
+
+#+BEGIN_SRC emacs-lisp
+(defconst emacs-tmp-dir (format "%s/%s%s/" temporary-file-directory "emacs" (user-uid)))
+
+(setq backup-directory-alist
+      `((".*" . ,emacs-tmp-dir)))
+(setq auto-save-file-name-transforms
+      `((".*" ,emacs-tmp-dir t)))
+(setq auto-save-list-file-prefix
+      emacs-tmp-dir)
+#+END_SRC
+
+Disk space is cheap. Save lots.
+
+#+BEGIN_SRC emacs-lisp
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
+#+END_SRC
+
+
+

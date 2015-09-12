@@ -65,7 +65,6 @@ Disk space is cheap. Save lots.
 
 *** History
 
-
 From http://pages.sachachua.com/.emacs.d/Sacha.html and http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
 
 #+BEGIN_SRC emacs-lisp
@@ -81,18 +80,38 @@ From http://pages.sachachua.com/.emacs.d/Sacha.html and http://www.wisdomandwond
 #+END_SRC
 
 *** Windowing mode configuration
+When running in a graphical mode, I want to hide all the extra cruft that I don't use.
 
-When running in a graphical mode, I want to hide all the extra cruft that I don't use:
+Turn off mouse interface early in startup to avoid momentary display
 
 #+BEGIN_SRC emacs-lisp
-  (when window-system
-    (tooltip-mode -1)
-    (tool-bar-mode -1)
-    (menu-bar-mode -1)
-    (scroll-bar-mode -1))
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+#+END_SRC
+
+No splash screen please
+
+#+BEGIN_SRC emacs-lisp
+(setq inhibit-startup-screen t)
 #+END_SRC
 
 *** Look & Feel (UX)
+
+**** Color scheme
+My preference is the Cyberpunk theme, which was pulled from Overtone.
+
+#+BEGIN_SRC emacs-lisp
+(load-theme 'cyberpunk t)
+#+END_SRC
+
+**** Fonts
+
+#+BEGIN_SRC emacs-lisp
+  (when (eq system-type 'darwin)
+    (set-face-attribute 'default nil :family "Monaco")
+    (set-face-attribute 'default nil :height 200))
+#+END_SRC
 
 *** UTF-8 Support
 

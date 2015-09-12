@@ -1,4 +1,4 @@
-#+TITLE emacs.d
+#+TITLE: mathias/emacs.d
 
 An attempt at rewriting my (mathias's) emacs config in a literate programming style with org's babel mode.
 

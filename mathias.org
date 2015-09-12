@@ -63,4 +63,20 @@ Disk space is cheap. Save lots.
 #+END_SRC
 
 
+*** History
+
+
+From http://pages.sachachua.com/.emacs.d/Sacha.html and http://www.wisdomandwonder.com/wordpress/wp-content/uploads/2014/03/C3F.html
+
+#+BEGIN_SRC emacs-lisp
+(setq savehist-file "~/.emacs.d/savehist")
+(savehist-mode 1)
+(setq history-length t)
+(setq history-delete-duplicates t)
+(setq savehist-save-minibuffer-history 1)
+(setq savehist-additional-variables
+      '(kill-ring
+        search-ring
+        regexp-search-ring))
+#+END_SRC
 

@@ -1,0 +1,27 @@
+# vim.gitignore
+.*.sw[a-z]
+*.un~
+Session.vim
+
+# OSX.gitignore
+.DS_Store
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# vim history stuffs
+vim/.vim/.netrwhist
+
+# Vim bundles should be cloned, not checked in
+vim/.vim/bundle
+
+## Files compiled by emacs for this config:
+mathias.el
+
+## Files used by emacs that we don't want to commit:
+/elpa/
+/auto-save-list/
+/savehist
+

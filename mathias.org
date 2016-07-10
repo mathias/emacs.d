@@ -5,7 +5,7 @@
 ** About this file
 <<babel-init>>
 
-Inspired by [[https://github.com/sachac/.emacs.d/blob/gh-pages/Sacha.org][Sacha Chua's Emacs configuration]] which demonstrates how to use org-babel to create a literate programming Emacs config.
+Inspired by [[https://github.com/sachac/.emacs.d/blob/gh-pages/Sacha.org][Sacha Chua's Emacs configuration]] which demonstrates how to use Org Babel mode to create a literate programming Emacs config.
 
 ** Personal information
 #+BEGIN_SRC emacs-lisp
@@ -39,7 +39,7 @@ If I had any, this is where they'd live:
 
 *** Backups
 
-I used the approach my old =.emacs= config file used in setting up backup files:
+I used this approach my old =.emacs= config file used in setting up backup files:
 
 Do not save autosave/swap files in current directory. Save all tempfiles in $TMPDIR/emacs$UID/ instead:
 

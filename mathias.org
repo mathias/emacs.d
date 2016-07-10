@@ -108,9 +108,9 @@ My preference is the Cyberpunk theme, which was pulled from Overtone.
 **** Fonts
 
 #+BEGIN_SRC emacs-lisp
-  (when (eq system-type 'darwin)
-    (set-face-attribute 'default nil :family "Monaco")
-    (set-face-attribute 'default nil :height 200))
+(when (eq system-type 'darwin)
+  (set-face-attribute 'default nil :family "Monaco")
+  (set-face-attribute 'default nil :height 200))
 #+END_SRC
 
 *** UTF-8 Support

@@ -1,18 +1,21 @@
 #+TITLE: mathias/emacs.d
 
-An attempt at rewriting my (mathias's) emacs config in a literate programming style with org's babel mode.
+An attempt at rewriting my  emacs config (AGAIN) in a literate programming style with org babel.
 
-*Note*: This is super WIP! It is not fully finished and I only use it while I am developing it. Don't read into it too much.
+*Note*: This is super WIP, again! I started over in 2021.
 
 ** Inspirations
 
-Inspired by http://pages.sachachua.com/.emacs.d/Sacha.html Initial setup and file layout from Sacha's emacs config.
+
+Inspired by http://pages.sachachua.com/.emacs.d/Sacha.html
+and https://www.youtube.com/watch?v=74zOY-vgkyw
+
 
 ** License
 
 Licensed under the MIT License, same as my [[https://github.com/mathias/dotfiles][dotfiles]].
 
-Copyright (c) 2015 Matt Gauger.
+Copyright (c) 2021 Matt Gauger.
 
 MIT License
 

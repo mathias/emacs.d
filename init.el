@@ -1,4 +1,4 @@
-(setq inhibit-start-up-message t)
+(setq inhibit-startup-message t)
 
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))

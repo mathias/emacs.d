@@ -67,6 +67,8 @@
   :config
   (mood-line-mode 1))
 
+(use-package doom-themes)
+
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 

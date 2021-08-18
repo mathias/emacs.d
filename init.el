@@ -9,8 +9,6 @@
 ;; Set up the visible bell
 (setq visible-bell t)
 
-(load-theme 'wombat)
-
 ;; Make ESC quit prompts
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -67,7 +65,8 @@
   :config
   (mood-line-mode 1))
 
-(use-package doom-themes)
+(use-package doom-themes
+  :init (load-theme 'doom-dracula t))
 
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))

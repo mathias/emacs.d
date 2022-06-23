@@ -61,6 +61,8 @@
   :config
   (ivy-mode 1))
 
+(global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
+
 (use-package mood-line
   :config
   (mood-line-mode 1))
@@ -101,3 +103,21 @@
   ([remap describe-command] . helpful-command)
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
+
+(use-package fennel-mode)
+
+(use-package ripgrep
+  :bind ("C-x C-g" . 'ripgrep-regexp))
+
+(use-package paredit)
+
+;; Org mode settings (until set up later)
+(require 'org-tempo)
+(use-package org
+  :config (setq truncate-lines t))
+(setq org-log-into-drawer "LOGBOOK")
+(setq org-todo-keywords
+  '((sequence "TODO(t)" "WAITING(w@/!)" "DOING(!)" "DONE(d!)" "CANCELED(c@)")))
+
+
+;; SPACE for custom set variables to live after

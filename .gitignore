@@ -1,3 +1,28 @@
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# flymake-mode
+*_flymake.*
+
+# eshell files
+/eshell/history
+/eshell/lastdir
+
+# elpa packages
+/elpa/
+
+
 # vim.gitignore
 .*.sw[a-z]
 *.un~
@@ -19,9 +44,3 @@ vim/.vim/bundle
 
 ## Files compiled by emacs for this config:
 mathias.el
-
-## Files used by emacs that we don't want to commit:
-/elpa/
-/auto-save-list/
-/savehist
-

@@ -110,14 +110,26 @@
   :bind ("C-x C-g" . 'ripgrep-regexp))
 
 (use-package paredit)
+(use-package try)
 
 ;; Org mode settings (until set up later)
 (require 'org-tempo)
 (use-package org
-  :config (setq truncate-lines t))
+  :defer t
+   :config (progn
+	    (visual-line-mode t)
+	    (flyspell-mode t)
+)
 (setq org-log-into-drawer "LOGBOOK")
 (setq org-todo-keywords
-  '((sequence "TODO(t)" "WAITING(w@/!)" "DOING(!)" "DONE(d!)" "CANCELED(c@)")))
+  '((sequence "TODO(t)" "IN PROGRESS(!)" "WAITING(w@/!)" "DOING(!)" "DONE(d!)" "CANCELED(c@)")))
 
+;; Global keybindings
+(global-set-key (kbd "C-c t") 'toggle-truncate-lines)
+
+;; change font size, interactively
+(global-set-key (kbd "s-+") 'text-scale-increase)
+(global-set-key (kbd "s-=") 'text-scale-increase)
+(global-set-key (kbd "s--") 'text-scale-decrease)
 
 ;; SPACE for custom set variables to live after

@@ -16,7 +16,6 @@
 (require 'package)
 
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			 ("org" . "https://orgmode.org/elpa/")
 			 ("elpa" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -35,33 +34,11 @@
 
 ;; disable line numbers for some modes
 (dolist (mode '(org-mode-hook
-		term-mode-hook
-		eshell-mode-hook))
+    term-mode-hook
+    eshell-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 (use-package command-log-mode)
-
-;; note: can use both ivy and helm and specify which you want for each situation
-;; starting by using ivy
-(use-package ivy
-  :diminish ;; diminish the mode name in the mode list
-  :bind (("C-s" . swiper)
-	 :map ivy-minibuffer-map
-	 ("TAB" . ivy-alt-done)
-	 ("C-l" . ivy-alt-done)
-	 ("C-j" . ivy-next-line)
-	 ("C-k" . ivy-previous-line)
-	 :map ivy-switch-buffer-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-l" . ivy-done)
-	 ("C-d" . ivy-switch-buffer-kill)
-	 :map ivy-reverse-i-search-map
-	 ("C-k" . ivy-previous-line)
-	 ("C-d" . ivy-reverse-i-search-kill))
-  :config
-  (ivy-mode 1))
-
-(global-set-key (kbd "C-M-j") 'counsel-switch-buffer)
 
 (use-package mood-line
   :config
@@ -83,15 +60,35 @@
 
 (use-package counsel
   :bind (("M-x" . counsel-M-x)
-	 ("C-x b" . counsel-ibuffer)
-	 ("C-x C-f" . counsel-find-file)
-	 ("C-M-j" . 'counsel-switch-buffer)
-         :map minibuffer-local-map
-         ("C-r" . 'counsel-minibuffer-history))
+   ("C-x b" . counsel-ibuffer)
+   ("C-x C-f" . counsel-find-file)
+   ("C-M-j" . 'counsel-switch-buffer)
+	 :map minibuffer-local-map
+	 ("C-r" . 'counsel-minibuffer-history))
   :custom
   (counsel-linux-app-format-function #'counsel-linux-app-format-function-name-only)
   :config
   (counsel-mode 1))
+
+(use-package ivy
+  :diminish ;; diminish the mode name in the mode list
+  :bind (("C-s" . swiper)
+   :map ivy-minibuffer-map
+   ("TAB" . ivy-alt-done)
+   ("C-l" . ivy-alt-done)
+   ("C-j" . ivy-next-line)
+   ("C-k" . ivy-previous-line)
+   :map ivy-switch-buffer-map
+   ("C-k" . ivy-previous-line)
+   ("C-l" . ivy-done)
+   ("C-d" . ivy-switch-buffer-kill)
+   :map ivy-reverse-i-search-map
+   ("C-k" . ivy-previous-line)
+   ("C-d" . ivy-reverse-i-search-kill))
+  :config
+  (ivy-mode 1))
+
+(use-package swiper)
 
 ;; replacement for built-in help:
 (use-package helpful
@@ -116,13 +113,16 @@
 (require 'org-tempo)
 (use-package org
   :defer t
-   :config (progn
-	    (visual-line-mode t)
-	    (flyspell-mode t)
-)
+  :mode (("\\.org$" . org-mode)))
+
+
 (setq org-log-into-drawer "LOGBOOK")
 (setq org-todo-keywords
   '((sequence "TODO(t)" "IN PROGRESS(!)" "WAITING(w@/!)" "DOING(!)" "DONE(d!)" "CANCELED(c@)")))
+
+(with-eval-after-load 'org
+  ;;(setq org-startup-indented t) ; Enable `org-indent-mode' by default
+  (add-hook 'org-mode-hook #'visual-line-mode)) ; Enable visual line mode
 
 ;; Global keybindings
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)
@@ -131,5 +131,3 @@
 (global-set-key (kbd "s-+") 'text-scale-increase)
 (global-set-key (kbd "s-=") 'text-scale-increase)
 (global-set-key (kbd "s--") 'text-scale-decrease)
-
-;; SPACE for custom set variables to live after

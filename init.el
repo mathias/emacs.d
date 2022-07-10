@@ -109,8 +109,14 @@
 (use-package paredit)
 (use-package try)
 
+(use-package markdown-mode)
+(use-package keyfreq)
+(use-package writegood-mode)
+
 ;; Org mode settings (until set up later)
 (require 'org-tempo)
+(use-package org-journal
+  :defer t)
 (use-package org
   :defer t
   :mode (("\\.org$" . org-mode)))
@@ -142,3 +148,10 @@
       `((".*" ,emacs-tmp-dir t)))
 (setq auto-save-list-file-prefix
       emacs-tmp-dir)
+
+(setq custom-file "~/.emacs.d/custom.el")
+;; Revert Dired and other buffers
+(setq global-auto-revert-non-file-buffers t)
+
+;; Autorevert files (mandatory if working with VCS like git)
+(global-auto-revert-mode t)

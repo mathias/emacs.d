@@ -101,7 +101,9 @@
   ([remap describe-variable] . counsel-describe-variable)
   ([remap describe-key] . helpful-key))
 
-(use-package fennel-mode)
+;;(use-package fennel-mode)
+(autoload 'antifennel-mode "~/src/git.sr.ht/technomancy/fennel-mode/antifennel.el" nil t)
+(add-hook 'lua-mode-hook 'antifennel-mode)
 
 (use-package ripgrep
   :bind ("C-x C-g" . 'ripgrep-regexp))
@@ -121,6 +123,23 @@
   :defer t
   :mode (("\\.org$" . org-mode)))
 
+(use-package dashboard
+  :ensure t
+  :config
+  (dashboard-setup-startup-hook)
+  (setq dashboard-icon-type 'all-the-icons))
+
+(use-package page-break-lines)
+(use-package all-the-icons
+  :if (display-graphic-p))
+
+(use-package projectile
+  :ensure t
+  :init
+  (projectile-mode +1)
+  :bind (:map projectile-mode-map
+              ("s-p" . projectile-command-map)
+              ("C-c p" . projectile-command-map)))
 
 (setq org-log-into-drawer "LOGBOOK")
 (setq org-todo-keywords
@@ -129,6 +148,67 @@
 (with-eval-after-load 'org
   ;;(setq org-startup-indented t) ; Enable `org-indent-mode' by default
   (add-hook 'org-mode-hook #'visual-line-mode)) ; Enable visual line mode
+
+(setq org-directory "~/org/personal")
+
+;; Set to the name of the file where new capture notes will be stored
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+(define-key global-map "\C-cc" 'org-capture)
+
+(setq org-capture-templates
+      '(("n" "Note"
+	 entry (file "~/org/personal/notes.org")
+	 "* %U %?\n\n  %i\n\n  From: %a")
+	("j" "Journal Entry"
+	 entry (file+function "~/org/personal/journal.org"
+			      (lambda ()
+				(org-datetree-find-date-create
+				 (org-date-to-gregorian (org-today)) t)
+				(re-search-forward "^\\*.+ log" nil t)))
+	 "* Entry: %?\n\n  %i\n\n  From: %a"
+	 :empty-lines 1)
+	("t" "TODO"
+	 entry (file "~/org/personal/notes.org")
+	 "* TODO %U %?\n\n %i \n\n From: %a"
+	 :empty-lines 1)
+	("a" "annotate.mattgauger.com link"
+	 entry (file "~/org/personal/annotate.mattgauger.com/index.org")
+	 "* %? %U\n\n%i"
+	 :prepend 1)))
+
+
+;; bind Org agendas view
+(global-set-key "\C-ca" 'org-agenda)
+
+;; org-journal setup
+(setq org-journal-dir (concat org-directory "/journal"))
+
+(defun get-journal-file-today ()
+  "Return filename for today's journal entry."
+  (let ((daily-name (format-time-string "%Y%m%d.org")))
+    (expand-file-name (concat org-journal-dir "/" daily-name))))
+
+(defun journal-file-today ()
+  "Create and load a journal file based on today's date."
+  (interactive)
+  (find-file (get-journal-file-today)))
+
+(global-set-key (kbd "C-c f j") 'journal-file-today)
+
+(defun journal-file-insert ()
+  "Insert's the journal heading based on the file's name."
+  (interactive)
+  (insert (format-time-string
+	   "#+TITLE: Journal Entry - %Y-%b-%d (%A)\n\n")))
+
+(add-hook 'find-file-hook 'auto-insert)
+(define-auto-insert "/[0-9]\\{8\\}\\.org$" [journal-file-insert])
+
+(require 'ox-publish)
+(setq org-publish-project-alist
+      '(
+	;; TODO: https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
+	))
 
 ;; Global keybindings
 (global-set-key (kbd "C-c t") 'toggle-truncate-lines)

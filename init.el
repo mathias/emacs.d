@@ -141,6 +141,25 @@
               ("s-p" . projectile-command-map)
               ("C-c p" . projectile-command-map)))
 
+(use-package org-mem
+  :defer
+  :config
+  ;; At least one of these two is needed
+  (setq org-mem-do-sync-with-org-id t)
+  (setq org-mem-watch-dirs
+        (list "~/org/personal"))
+  (org-mem-updater-mode))
+
+(use-package org-node
+  :init
+  ;; Optional key bindings
+  ;; Tip: Try changing these to just "M-o"!
+  (keymap-global-set "M-o n" org-node-global-prefix-map)
+  (with-eval-after-load 'org
+    (keymap-set org-mode-map "M-o n" org-node-org-prefix-map))
+  :config
+  (org-node-cache-mode))
+
 (setq org-log-into-drawer "LOGBOOK")
 (setq org-todo-keywords
   '((sequence "TODO(t)" "IN PROGRESS(!)" "WAITING(w@/!)" "DOING(!)" "DONE(d!)" "CANCELED(c@)")))
